@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodePro Editor</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .header {
+        background: rgba(30, 41, 59, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 15px 20px;
+        font-size: 24px;
+        font-weight: bold;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      .tabs {
+        background: rgba(15, 23, 42, 0.7);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(8px);
+      }
+
+      .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.3s;
+        color: #cbd5e1;
+      }
+
+      .tab.active {
+        background: rgba(59, 130, 246, 0.8);
+        color: #f8fafc;
+      }
+
+      .controls button,
+      .show-more-btn {
+        background: linear-gradient(90deg, #4f46e5, #3b82f6);
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+      }
+
+      .controls button:hover,
+      .show-more-btn:hover {
+        background: linear-gradient(90deg, #4338ca, #2563eb);
+        transform: scale(1.05);
+      }
+
+      .output-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .editor {
+        flex: 1;
+        display: none;
+        flex-direction: column;
+      }
+
+      .editor.active {
+        display: flex;
+      }
+
+      .code-wrapper textarea {
+        background: transparent;
+        color: #e2e8f0;
+        flex: 1;
+        resize: none;
+        padding: 10px;
+        font-family: monospace;
+        font-size: 14px;
+        border: none;
+        outline: none;
+      }
+
+      .output-panel iframe {
+        flex: 1;
+        border: none;
+      }
+
+      .console {
+        height: 120px;
+        overflow-y: auto;
+        background: #0f172a;
+        padding: 5px;
+        color: #0f0;
+        font-family: monospace;
+      }
+
+      .line-numbers {
+        background: rgba(255, 255, 255, 0.05);
+        color: #94a3b8;
+        padding: 10px 5px;
+        text-align: right;
+        user-select: none;
+        font-family: monospace;
+        font-size: 14px;
+        min-width: 35px;
+        border-right: 1px solid #ccc;
+        white-space: pre-line;
+      }
+
+      .code-wrapper {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">CodePro Editor</div>
+    <div class="tabs">
+      <div class="tab-buttons">
+        <div class="tab active" data-tab="html">HTML</div>
+        <div class="tab" data-tab="css">CSS</div>
+        <div class="tab" data-tab="js">JS</div>
+      </div>
+      <div class="controls">
+        <button id="runBtn" style="color: red; border: 2px solid red">
+          Run
+        </button>
+        <button id="newPageBtn">New</button>
+        <div class="show-more-container">
+          <button class="show-more-btn">⋮</button>
+          <div class="show-more-menu" id="showMoreMenu">
+            <button id="downloadBtn">Download</button>
+            <button id="copyAllBtn">Copy All</button>
+            <button id="shareBtn">Share</button>
+            <button id="shortcutsBtn">Shortcuts</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="editor-container">
+      <div class="editor-panel">
+        <div class="editor active" id="html">
+          <div class="code-wrapper">
+            <div class="line-numbers" id="htmlLines"></div>
+            <textarea id="htmlCode" placeholder="Write HTML here..."></textarea>
+          </div>
+        </div>
+
+        <div class="editor" id="css">
+          <div class="code-wrapper">
+            <div class="line-numbers" id="cssLines"></div>
+            <textarea id="cssCode" placeholder="Write CSS here..."></textarea>
+          </div>
+        </div>
+
+        <div class="editor" id="js">
+          <div class="code-wrapper">
+            <div class="line-numbers" id="jsLines"></div>
+            <textarea id="jsCode" placeholder="Write JS here..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="output-panel">
+        <iframe id="preview"></iframe>
+        <div class="console" id="console"></div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

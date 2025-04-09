@@ -1,0 +1,70 @@
+body {
+  color: #f1f5f9;
+  background: #1e293b;
+}
+
+.header {
+  color: white;
+  background: rgba(30, 41, 59, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabs {
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.tab {
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.5);
+}
+
+.tab.active {
+  color: #f8fafc;
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
+}
+
+.controls button {
+  color: white;
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
+}
+
+.controls button:hover {
+  background: linear-gradient(90deg, #4338ca, #2563eb);
+}
+
+.editor-panel {
+  background: rgba(30, 41, 59, 0.5);
+}
+
+.output-panel {
+  background: rgba(30, 41, 59, 0.5);
+}
+
+.code-wrapper textarea {
+  color: #e2e8f0;
+  background: transparent;
+}
+
+.output {
+  background-color: #959393;
+}
+
+.console {
+  color: #0f0;
+  background: #0f172a;
+}
+
+.show-more-menu button {
+  color: whitesmoke !important;
+  background: #0f172a;
+}
+
+.show-more-menu button:hover {
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
+}
+
+.line-numbers {
+  color: #ffffff;
+  background: #0f172a;
+  border-right: 1px solid #ffffff;
+}

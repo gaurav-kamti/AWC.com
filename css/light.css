@@ -1,0 +1,84 @@
+body {
+  color: #102c57;
+  background: #eadbc8;
+}
+
+.header {
+  color: #102c57;
+  background: rgba(234, 219, 200, 0.8);
+  border-bottom: 1px solid rgba(16, 44, 87, 0.1);
+}
+
+.tabs {
+  background: rgba(248, 240, 229, 0.7);
+  border-bottom: solid #102c57;
+  border-top: solid #102c57;
+}
+
+.tab {
+  color: #102c57;
+  background: #dac0a3;
+}
+
+.tab.active {
+  color: #f8f0e5;
+  background: linear-gradient(90deg, #f0bb78, #102c57);
+}
+
+.controls button,
+.show-more-btn {
+  color: #f8f0e5;
+  background: linear-gradient(90deg, #f0bb78, #102c57);
+}
+
+.controls button:hover,
+.show-more-btn:hover {
+  background: linear-gradient(90deg, #102c57, #f0bb78);
+}
+
+.editor-panel {
+  background: rgba(234, 219, 200, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.output-panel {
+  color: #102c57 !important;
+  background: rgba(234, 219, 200, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.code-wrapper textarea {
+  color: #102c57;
+  background: transparent;
+  box-shadow: #102c57;
+}
+
+.output {
+  background-color: #dac0a3;
+}
+
+.console {
+  color: #f8f0e5;
+  background: rgba(248, 240, 229, 0.7);
+}
+
+.show-more-menu {
+  background-color: #eadbc8;
+}
+
+.show-more-menu button {
+  color: #102c57 !important;
+  background: rgba(248, 240, 229, 0.7);
+}
+
+.show-more-menu button:hover {
+  background: linear-gradient(90deg, #f0bb78, #102c57);
+}
+
+.line-numbers {
+  color: #102c57;
+  background: rgba(248, 240, 229, 0.7);
+  border-right: 1px solid #102c57;
+}

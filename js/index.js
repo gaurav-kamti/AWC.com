@@ -11,7 +11,7 @@ async function signup() {
   const username = document.getElementById("signup-username").value;
   const password = document.getElementById("signup-password").value;
 
-  const res = await fetch("http://localhost:3000/signup", {
+  const res = await fetch("https://awc-com.onrender.com/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
@@ -26,7 +26,7 @@ async function login() {
   const username = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
 
-  const res = await fetch("http://localhost:3000/login", {
+  const res = await fetch("https://awc-com.onrender.com/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),

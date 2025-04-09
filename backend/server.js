@@ -7,14 +7,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Replace with your actual connection string
-mongoose.connect(
-  "mongodb+srv://admin:admin123@awc0.wgl3pbn.mongodb.net/loginDB?retryWrites=true&w=majority&appName=awc0",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 const UserSchema = new mongoose.Schema({
   username: String,
@@ -52,6 +48,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("✅ Server running on http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });

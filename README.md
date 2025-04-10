@@ -79,10 +79,6 @@ a-web-editor/
       <li>Node.js</li>
       <li>Express.js</li>
       <li>MongoDB (for storing user data)</li>
-      <li>bcrypt (password hashing)</li>
-      <li>body-parser</li>
-      <li>cors</li>
-      <li>fs (file system)</li>
     </ul>
   </li>
   <li><strong>Deployment:</strong> Netlify</li>

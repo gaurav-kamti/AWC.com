@@ -8,9 +8,32 @@ function toggleForms(form) {
 }
 
 async function signup() {
-  const username = document.getElementById("signup-username").value;
+  const username = document.getElementById("signup-username").value.trim();
   const password = document.getElementById("signup-password").value;
 
+  // 🚫 Prevent empty input
+  if (!username || !password) {
+    alert("Username and password cannot be empty.");
+    return;
+  }
+
+  // ✅  Minimum length check
+  if (username.length < 6) {
+    alert("Username must be at least 6 characters.");
+    return;
+  }
+
+  // ✅  Strong password pattern
+  const passwordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+  if (!passwordPattern.test(password)) {
+    alert(
+      "Password must include 1 capital letter, 1 lowercase, 1 number, and 1 special character."
+    );
+    return;
+  }
+
+  // ✅ Proceed to signup
   const res = await fetch("https://awc-com.onrender.com/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

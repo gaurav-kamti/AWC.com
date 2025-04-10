@@ -40,3 +40,35 @@ async function login() {
     alert(data.message || "Login failed");
   }
 }
+
+function handleLoginClick(btn) {
+  const originalText = btn.innerText;
+  btn.classList.add("clicked");
+
+  setTimeout(() => {
+    btn.disabled = true;
+    btn.innerText = "Logging in...";
+    btn.classList.remove("clicked");
+
+    login().finally(() => {
+      btn.disabled = false;
+      btn.innerText = originalText;
+    });
+  }, 150);
+}
+
+function handleSignupClick(btn) {
+  const originalText = btn.innerText;
+  btn.classList.add("clicked");
+
+  setTimeout(() => {
+    btn.disabled = true;
+    btn.innerText = "Signing up...";
+    btn.classList.remove("clicked");
+
+    signup().finally(() => {
+      btn.disabled = false;
+      btn.innerText = originalText;
+    });
+  }, 150);
+}

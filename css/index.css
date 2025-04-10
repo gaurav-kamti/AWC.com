@@ -135,3 +135,9 @@ body {
 .signup-card .signup a:hover {
   text-decoration: underline;
 }
+
+button.clicked {
+  transform: scale(0.97);
+  background: #1d4ed8 !important;
+  transition: transform 0.1s ease, background 0.1s ease;
+}

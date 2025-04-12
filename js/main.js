@@ -247,9 +247,10 @@ window.addEventListener("DOMContentLoaded", () => {
     lightIcon.style.display = "none"; // Hide moon icon
     darkIcon.style.display = "block"; // Show sun icon
   } else {
-    lightTheme.disabled = false;
-    darkTheme.disabled = true;
-    lightIcon.style.display = "block"; // Show moon icon
-    darkIcon.style.display = "none"; // Hide sun icon
+    lightTheme.disabled = true;
+    darkTheme.disabled = false;
+    lightIcon.style.display = "none"; // Show moon icon
+    darkIcon.style.display = "block"; // Hide sun icon
+    localStorage.setItem("theme", "dark");
   }
 });

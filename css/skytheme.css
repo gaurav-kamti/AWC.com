@@ -1,0 +1,92 @@
+body {
+  color: #1e293b;
+  background: #c6cbd1;
+}
+
+.header {
+  color: #0ea5e9;
+  background: rgba(241, 245, 249, 0.9);
+  border-bottom: 1px solid rgba(30, 41, 59, 0.1);
+}
+
+.tabs {
+  background: #dbeafe;
+  border-bottom: 1px solid #cbd5e1;
+  border-top: 1px solid #cbd5e1;
+}
+
+.tab {
+  color: #334155;
+  background: #ffffff;
+}
+
+.tab.active {
+  color: white;
+  background: linear-gradient(90deg, #3b82f6, #0ea5e9);
+}
+
+.controls button,
+.show-more-btn {
+  color: white;
+  background: linear-gradient(90deg, #3b82f6, #0ea5e9);
+}
+
+.controls button:hover,
+.show-more-btn:hover {
+  background: linear-gradient(90deg, #2563eb, #0284c7);
+}
+
+.editor-panel {
+  background: #f1f5f9;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+.output-panel {
+  background: #f1f5f9;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+.code-wrapper textarea {
+  color: #1e293b;
+  background: transparent;
+  font-family: "Fira Code", monospace;
+}
+
+.output {
+  background-color: #cbd5e1;
+  color: #1e293b;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.console {
+  color: #10b981;
+  background: #dbeafe; /* sky blue */
+  border-radius: 10px;
+  padding: 12px;
+  font-family: "Courier New", Courier, monospace;
+  white-space: pre-wrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.show-more-menu {
+  background-color: #f8fafc;
+}
+
+.show-more-menu button {
+  color: #1e293b !important;
+  background: #f1f5f9;
+}
+
+.show-more-menu button:hover {
+  background: linear-gradient(90deg, #3b82f6, #0ea5e9);
+  color: white !important;
+}
+
+.line-numbers {
+  color: #334155;
+  background: #dbeafe; /* lightest blue tone */
+  border-right: 1px solid #94a3b8;
+}

@@ -14,9 +14,9 @@ document.querySelector(".tab-buttons").addEventListener("click", (event) => {
 
 // Run button logic
 document.getElementById("runBtn").addEventListener("click", () => {
-  const html = document.getElementById("htmlCode").value;
-  const css = `<style>${document.getElementById("cssCode").value}</style>`;
-  const jsCode = document.getElementById("jsCode").value;
+  const html = htmlEditor.getValue();
+  const css = `<style>${cssEditor.getValue()}</style>`;
+  const jsCode = jsEditor.getValue();
 
   const completeCode = `
         ${html}
@@ -52,9 +52,9 @@ document.getElementById("runBtn").addEventListener("click", () => {
 // New Page Button Logic
 document.getElementById("newPageBtn").addEventListener("click", () => {
   if (confirm("Are you sure you want to clear all code?")) {
-    ["htmlCode", "cssCode", "jsCode"].forEach(
-      (id) => (document.getElementById(id).value = "")
-    );
+    htmlEditor.setValue("");
+    cssEditor.setValue("");
+    jsEditor.setValue("");
     consoleEl.innerHTML = "";
     preview.contentDocument.open();
     preview.contentDocument.write("");
@@ -100,21 +100,9 @@ function downloadFile(content, filename, type) {
 }
 
 document.getElementById("downloadBtn").addEventListener("click", () => {
-  downloadFile(
-    document.getElementById("htmlCode").value,
-    "editor.html",
-    "text/html"
-  );
-  downloadFile(
-    document.getElementById("cssCode").value,
-    "styles.css",
-    "text/css"
-  );
-  downloadFile(
-    document.getElementById("jsCode").value,
-    "script.js",
-    "text/javascript"
-  );
+  downloadFile(htmlEditor.getValue(), "editor.html", "text/html");
+  downloadFile(cssEditor.getValue(), "styles.css", "text/css");
+  downloadFile(jsEditor.getValue(), "script.js", "text/javascript");
 });
 
 // Shortcuts logic (inside Show More)
@@ -129,13 +117,13 @@ document.getElementById("shortcutsBtn").addEventListener("click", () => {
 document.getElementById("copyAllBtn").addEventListener("click", () => {
   const allCode = `
 --- HTML ---
-${document.getElementById("htmlCode").value}
+${htmlEditor.getValue()}
 
 --- CSS ---
-${document.getElementById("cssCode").value}
+${cssEditor.getValue()}
 
 --- JS ---
-${document.getElementById("jsCode").value}
+${jsEditor.getValue()}
   `;
   navigator.clipboard.writeText(allCode);
   alert("All code copied to clipboard!");
@@ -146,9 +134,9 @@ ${document.getElementById("jsCode").value}
 document.getElementById("shareBtn").addEventListener("click", (e) => {
   e.preventDefault();
   const params = new URLSearchParams({
-    html: document.getElementById("htmlCode").value,
-    css: document.getElementById("cssCode").value,
-    js: document.getElementById("jsCode").value,
+    html: htmlEditor.getValue(),
+    css: cssEditor.getValue(),
+    js: jsEditor.getValue(),
   }).toString();
   const shareUrl = `${window.location.href.split("?")[0]}?${params}`;
   navigator.clipboard
@@ -156,62 +144,14 @@ document.getElementById("shareBtn").addEventListener("click", (e) => {
     .then(() => alert("Shareable link copied to clipboard!"));
 });
 
-// Load code from URL params on page load
-window.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  ["html", "css", "js"].forEach((lang) => {
-    document.getElementById(`${lang}Code`).value = decodeURIComponent(
-      params.get(lang) || ""
-    );
-  });
-});
-
 // Load code from URL params if present
 window.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   if (params.has("html") || params.has("css") || params.has("js")) {
-    document.getElementById("htmlCode").value = decodeURIComponent(
-      params.get("html") || ""
-    );
-    document.getElementById("cssCode").value = decodeURIComponent(
-      params.get("css") || ""
-    );
-    document.getElementById("jsCode").value = decodeURIComponent(
-      params.get("js") || ""
-    );
+    htmlEditor.setValue(decodeURIComponent(params.get("html") || ""));
+    cssEditor.setValue(decodeURIComponent(params.get("css") || ""));
+    jsEditor.setValue(decodeURIComponent(params.get("js") || ""));
   }
-});
-
-function updateLineNumbers(textarea, lineNumberElement) {
-  const lines = textarea.value.split("\n").length;
-  lineNumberElement.innerText = Array.from(
-    { length: lines },
-    (_, i) => i + 1
-  ).join("\n");
-}
-
-// Attach input listeners
-["html", "css", "js"].forEach((lang) => {
-  const textarea = document.getElementById(`${lang}Code`);
-  const lines = document.getElementById(`${lang}Lines`);
-
-  textarea.addEventListener("input", () => updateLineNumbers(textarea, lines));
-  textarea.addEventListener("scroll", () => {
-    lines.scrollTop = textarea.scrollTop;
-  });
-
-  // Initialize numbers on load
-  updateLineNumbers(textarea, lines);
-});
-
-// Save on every keystroke
-["html", "css", "js"].forEach((lang) => {
-  const textarea = document.getElementById(`${lang}Code`);
-  textarea.value = localStorage.getItem(lang) || ""; // Load saved code
-
-  textarea.addEventListener("input", () => {
-    localStorage.setItem(lang, textarea.value);
-  });
 });
 
 // Light/Dark Mode Toggle
@@ -228,6 +168,13 @@ document.getElementById("theme-toggle").addEventListener("click", () => {
   // Toggle icons correctly
   lightIcon.style.display = isLight ? "block" : "none"; // Moon shows in light mode
   darkIcon.style.display = isLight ? "none" : "block"; // Sun shows in dark mode
+
+  // Toggle Monaco editor theme as well
+  if (isLight) {
+    monaco.editor.setTheme("soft-blue"); // Light theme
+  } else {
+    monaco.editor.setTheme("dark-blue"); // Dark theme
+  }
 
   // Save theme preference
   localStorage.setItem("theme", isLight ? "dark" : "light");
@@ -253,4 +200,62 @@ window.addEventListener("DOMContentLoaded", () => {
     darkIcon.style.display = "block"; // Hide sun icon
     localStorage.setItem("theme", "dark");
   }
+});
+
+let htmlEditor, cssEditor, jsEditor;
+
+require(["vs/editor/editor.main"], function () {
+  monaco.editor.defineTheme("soft-blue", {
+    base: "vs",
+    inherit: true,
+    rules: [],
+    colors: {
+      "editor.background": "#f1f5f9",
+      "editor.foreground": "#1a1a1a",
+    },
+  });
+
+  monaco.editor.defineTheme("dark-blue", {
+    base: "vs-dark", // This is the base (dark theme).
+    inherit: true,
+    rules: [],
+    colors: {
+      "editor.background": "#1E293B", // This is the background color for the dark theme
+      "editor.foreground": "#ffffff",
+    },
+  });
+
+  monaco.editor.setTheme("dark-blue");
+
+  htmlEditor = monaco.editor.create(document.getElementById("htmlEditor"), {
+    value: localStorage.getItem("html") || "",
+    language: "html",
+    theme: "dark-blue",
+    automaticLayout: true,
+  });
+
+  cssEditor = monaco.editor.create(document.getElementById("cssEditor"), {
+    value: localStorage.getItem("css") || "",
+    language: "css",
+    theme: "dark-blue",
+    automaticLayout: true,
+  });
+
+  jsEditor = monaco.editor.create(document.getElementById("jsEditor"), {
+    value: localStorage.getItem("js") || "",
+    language: "javascript",
+    theme: "dark-blue",
+    automaticLayout: true,
+  });
+
+  // Save content on edit
+  htmlEditor.onDidChangeModelContent(() => {
+    localStorage.setItem("html", htmlEditor.getValue());
+  });
+  cssEditor.onDidChangeModelContent(() => {
+    localStorage.setItem("css", cssEditor.getValue());
+  });
+  jsEditor.onDidChangeModelContent(() => {
+    localStorage.setItem("js", jsEditor.getValue());
+  });
 });

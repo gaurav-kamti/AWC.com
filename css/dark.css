@@ -1,10 +1,10 @@
 body {
   color: #f1f5f9;
-  background: #1e293b;
+  background: #304058;
 }
 
 .header {
-  color: white;
+  color: #3b82f6;
   background: rgba(30, 41, 59, 0.8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -15,7 +15,7 @@ body {
 
 .tab {
   color: #cbd5e1;
-  background: rgba(30, 41, 59, 0.5);
+  background: #304058;
 }
 
 .tab.active {
@@ -37,7 +37,7 @@ body {
 }
 
 .output-panel {
-  background: rgba(30, 41, 59, 0.5);
+  background: #1e293b;
 }
 
 .code-wrapper textarea {
